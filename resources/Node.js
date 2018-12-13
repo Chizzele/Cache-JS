@@ -21,6 +21,3 @@ class Node {
   }
 
 }
-
-const testerNode = new Node("TESTNODE", "T1", yesterday, today);
-const testerNode2 = new Node("TESTNODE", "T2", yesterday, today);

@@ -5,12 +5,14 @@
     <title>Cache</title>
 
     <link rel="stylesheet" href="style.css">
-
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <script src="resources/libs/jquery.js" charset="utf-8"></script>
     <script src="resources/helpers.js" charset="utf-8"></script>
     <script src="resources/DlList.js" charset="utf-8"></script>
     <script src="resources/Node.js" charset="utf-8"></script>
     <script src="resources/Cache.js" charset="utf-8"></script>
+    <script src="tests/24hr.js" charset="utf-8"></script>
+    <script src="tests/100.js" charset="utf-8"></script>
     <script src="script.js" charset="utf-8"></script>
 
 
@@ -18,12 +20,41 @@
 
   </head>
   <body>
-    <div class="blueBg">
-      <button type="button" id="createCache$10" name="button">  Test 10 </button>
-      <button type="button" id="createCache$100" name="button">  Test 100 </button>
-      <button type="button" id="createCache$1000" name="button">  Test 1000 </button>
-      <button type="button" id="createCache$10000" name="button">  Test 1,0000 </button>
-      <button type="button" id="createCache$10001" name="button">  Test 10,001 </button>
+    <div class="controlContainer">
+      <div class="yellowRow">
+        Loader: load into the JS-built doubly linked list and cache it using the save <br><br>
+        <button type="button" id="createCache$10" name="button">  Load 10 </button>
+        <button type="button" id="createCache$100" name="button">  Load 100 </button>
+        <button type="button" id="createCache$1000" name="button">  Load 1000 </button>
+        <button type="button" id="createCache$10000" name="button">  Load 10,000 </button>
+        <!-- <button type="button" id="createCache$10001" name="button">  Load 10,001 </button> -->
+        <!-- <img id="giphy" src="resources/giphy.gif" class="gify" alt=""> -->
+      </div>
+
+      <div class="greyRow">
+        <button type="button" id="saveCache" disabled name="button">  Save Cache </button>
+        <button type="button" id="showCache" disabled name="button">  Show Cache </button>
+        <button type="button" id="showDL" disabled name="button">  Show DL-List </button>
+      </div>
+    </div>
+
+    <div class="controlContainer">
+      <div class="greenRow">
+        Tests: Real-ish Data <br><br>
+        <button type="button" id="testCache$100" name="button">  100 Tester </button>
+      </div>
+      <div class="greyRow">
+        <button type="button" id="saveCache" disabled name="button">  Save Cache </button>
+      </div>
+    </div>
+
+    <div class="controlContainer " id="clearCacheDiv">
+      <div class="redRow" >
+        Cache found : Clear?  <br><br>
+      </div>
+      <div class="greyRow" id="">
+        <button type="button" id="clearCache" name="button">  Clear Cache </button>
+      </div>
     </div>
   </body>
 </html>

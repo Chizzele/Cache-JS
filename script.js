@@ -1,51 +1,35 @@
 $(document).ready(function(){
-
-  // emptying cache
-
-  // binding click handlers with Jquery because ... vanilla JS is ...
-  // $('#createCache10').click(function(){
-  //   list.reset()
-  //   list.appendNewNode_n(10)
-  // });
-  //
-  // $('#createCache100').click(function(){
-  //   list.reset()
-  //   list.appendNewNode_n(100)
-  //
-  //   console.log('cache = ', mainCache);
-  // });
-
+  //checking for cache
+  if(localStorage.getItem('mainCache') != undefined || localStorage.getItem('mainCache') != null){
+    $('#clearCacheDiv').show();
+    mainCache.read();
+  }else{
+    $('#clearCacheDiv').hide();
+  }
+  $('#clearCache').click(function(){
+    localStorage.clear();
+    $('#clearCacheDiv').hide();
+    console.clear();
+  });
   $('button[id^="createCache$"]').click(function(){
     list.appendNewNode_n(parseInt(this.id.split('$')[1]))
+    list.traverseNodes(prepareForSave);
+    $('#giphy').addClass('gifyActive');
+    $('#saveCache').prop('disabled', false);
   });
 
-
-
-  function runTest(amount){
-    if(amount){
-      switch (parseInt(amount)) {
-        case 10:
-          console.log('running a case with 10 records');
-
-
-
-          break;
-        case 100:
-          console.log('running a case with 100 records');
-          // code here
-          break;
-        default:
-      }
-    }else{
-      console.error('please specify 10 OR 99 OR 100 OR 101 in method call');
-    }
-
-  }
-
-  function runAllTests(){
-
-  }
-
+  $('#saveCache').click(function(){
+    mainCache.save()
+    $('#showCache').prop('disabled', false);
+    $('#showDL').prop('disabled', false);
+    $('#clearCacheDiv').show();
+  });
+  $('#showCache').click(function(){
+    mainCache.read();
+  });
+  $('#showDL').click(function(){
+    list.logListOfNodes();
+  });
 
 
 });

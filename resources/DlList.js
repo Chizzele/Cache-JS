@@ -11,11 +11,9 @@ class DlList {
     if(isExistingNode){
       var node = isExistingNode;
     }else{
-      console.log('making new');
       var node = new Node(nodeKey, data, dateTimeCreated, dateTimeModified);
     }
     if(!this.head){ //null no need to set node prev/next as there is nothing else in list
-      console.log('hit');
       this.head = node;
       this.tail = node;
     }else{ //not null, head is set, will not change
@@ -23,7 +21,6 @@ class DlList {
         console.log('error, duplicate record not added');
         return false;
       }
-      console.log('hi2t');
       node.prev = this.tail; //linked list so only really need to move the tail
       this.tail.next = node;
       this.tail = node;
@@ -32,13 +29,15 @@ class DlList {
   }
 
   // append (n) amount of nodes to the list
-  appendNewNode_n(amount){
+  appendNewNode_n(amount, customData){
     let dateTimeCreated = new Date(); // for testing
     dateTimeCreated  = dateTimeCreated.setDate(dateTimeCreated.getDate()-1);
     for(var x = 0; x < amount; x++){
       this.appendNode("testData_"+amount , x, dateTimeCreated);
     }
     console.log('List Updated! ', amount, "entries added");
+    $('#giphy').removeClass('gifyActive');
+    $('#giphy').addClass('gifyGone');
     return true;
   }
 

@@ -1,0 +1,56 @@
+html{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.greyRow{
+  background: #cecece;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+  margin-top: 0;
+}
+
+.yellowRow{
+  background: #fffbef;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.redRow{
+  background: #ffdddd;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.greenRow{
+  background: #e5f7f5;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.gify{
+  width: 50px;
+  position: relative;
+  top: 20px;
+  visibility: hidden;
+}
+
+.gifyActive{
+  visibility: visible;
+}
+
+.gifyGone{
+  visibility: hidden !important;
+}
+
+.controlContainer{
+  border-radius: 15px;
+  border:1px solid black;
+  margin: 20px auto;
+}
