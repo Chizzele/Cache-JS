@@ -26,6 +26,14 @@ html{
   margin-bottom: 0;
 }
 
+.dangerRow{
+  background: #ffdddd;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+  margin-top: 0;
+}
+
 .greenRow{
   background: #e5f7f5;
   margin: 20px auto;

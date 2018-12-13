@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Cache</title>
+    <title>Tech Challenge</title>
 
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
@@ -11,7 +11,7 @@
     <script src="resources/DlList.js" charset="utf-8"></script>
     <script src="resources/Node.js" charset="utf-8"></script>
     <script src="resources/Cache.js" charset="utf-8"></script>
-    <script src="tests/24hr.js" charset="utf-8"></script>
+    <!-- <script src="tests/24hr.js" charset="utf-8"></script> -->
     <script src="tests/100.js" charset="utf-8"></script>
     <script src="script.js" charset="utf-8"></script>
 
@@ -22,7 +22,8 @@
   <body>
     <div class="controlContainer">
       <div class="yellowRow">
-        Loader: load into the JS-built doubly linked list and cache it using the save <br><br>
+        Loader: load into the JS-built doubly linked list and cache it using the save<br><br>
+        (note: values are near identical and removing nodes here doesnt do too much)<br><br>
         <button type="button" id="createCache$10" name="button">  Load 10 </button>
         <button type="button" id="createCache$100" name="button">  Load 100 </button>
         <button type="button" id="createCache$1000" name="button">  Load 1000 </button>
@@ -41,10 +42,16 @@
     <div class="controlContainer">
       <div class="greenRow">
         Tests: Real-ish Data <br><br>
-        <button type="button" id="testCache$100" name="button">  100 Tester </button>
+        (note: the sorts should work here)<br><br>
+        <button type="button" id="testCache100" name="button">  100 Tester </button>
       </div>
-      <div class="greyRow">
-        <button type="button" id="saveCache" disabled name="button">  Save Cache </button>
+      <div class="greyRow" style="margin-bottom:0;">
+        <button type="button" id="saveCache2s" disabled name="button">  Save Cache </button>
+        <button type="button" id="showCache2s" disabled name="button">  Show Cache </button>
+        <button type="button" id="showDL2s" disabled name="button">  Show DL-List </button>
+      </div>
+      <div class="dangerRow">
+        <button type="button" id="removoeOldCache2s" disabled name="button">  Remove Oldest </button>
       </div>
     </div>
 
@@ -56,5 +63,12 @@
         <button type="button" id="clearCache" name="button">  Clear Cache </button>
       </div>
     </div>
+    <div style="text-align:center;" class="">
+      <a href="#">About</a> <br> <br>
+      <a href="https://www.chizzele.com">Chizzele - Home</a> <br> <br>
+      <a href="https://www.edu.chizzele.com">Chizzele - Edu</a> <br> <br>
+      <a href="https://www.dev.chizzele.com">Chizzele - Dev</a> <br> <br>
+    </div>
+
   </body>
 </html>

@@ -10,6 +10,7 @@ class Node {
     };
     this.next = null;
     this.prev = null;
+    Node.preInitInstanceArr.push(this);
   }
 
   getKey(){
@@ -21,3 +22,5 @@ class Node {
   }
 
 }
+
+Node.preInitInstanceArr = [];

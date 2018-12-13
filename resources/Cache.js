@@ -30,3 +30,4 @@ class Cache {
 }
 
 var mainCache = new Cache('mainCache')
+var testCache = new Cache('mainCache')

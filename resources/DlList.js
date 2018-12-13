@@ -17,10 +17,6 @@ class DlList {
       this.head = node;
       this.tail = node;
     }else{ //not null, head is set, will not change
-      if(this.head.values.data == node.values.data || this.tail.values.data == node.values.data){
-        console.log('error, duplicate record not added');
-        return false;
-      }
       node.prev = this.tail; //linked list so only really need to move the tail
       this.tail.next = node;
       this.tail = node;
@@ -30,14 +26,21 @@ class DlList {
 
   // append (n) amount of nodes to the list
   appendNewNode_n(amount, customData){
-    let dateTimeCreated = new Date(); // for testing
-    dateTimeCreated  = dateTimeCreated.setDate(dateTimeCreated.getDate()-1);
-    for(var x = 0; x < amount; x++){
-      this.appendNode("testData_"+amount , x, dateTimeCreated);
+    if(customData){
+      for(var i = 0; i < customData.length; i++){
+        this.appendNode("", "", "", customData[i]);
+      }
+      console.log('Custom Data Loaded!');
+    }else{
+      let dateTimeCreated = new Date(); // for testing
+      dateTimeCreated  = dateTimeCreated.setDate(dateTimeCreated.getDate()-1);
+      for(var x = 0; x < amount; x++){
+        this.appendNode("testData_"+amount , x, dateTimeCreated);
+      }
+      console.log('List Updated! ', amount, "entries added");
+      $('#giphy').removeClass('gifyActive');
+      $('#giphy').addClass('gifyGone');
     }
-    console.log('List Updated! ', amount, "entries added");
-    $('#giphy').removeClass('gifyActive');
-    $('#giphy').addClass('gifyGone');
     return true;
   }
 
@@ -52,13 +55,30 @@ class DlList {
   // pass a function to work on the list, you can do the above by passing console.log
   // by passing console.log for instance
   // example ...... list.traverseNodes(console.log)
-  traverseNodes(fn){
-    var curr = this.head;
-    while(curr != null){
-      fn(curr);
-      curr = curr.next
+  traverseNodes(direction, fn){
+    if(direction == 'forward'){
+      let curr = this.head;
+      while(curr != null){
+        if(curr.next == null){
+          fn(curr, true);
+        }else{
+          fn(curr);
+        }
+        curr = curr.next
+      }
+    }else if(direction == 'reverse'){ // for use when finding the oldest
+      let curr = this.tail;
+      while(curr !== null){
+       if(curr.prev == null){
+         fn(curr, true);
+       }else{
+         fn(curr);
+       }
+       curr = curr.prev;
+      }
     }
   }
+
 
   reset() { // resets the list back to initialized list (no nodes)
     let curr = this.head;
@@ -80,11 +100,34 @@ class DlList {
      }
      curr = curr.next
     }
-    list.length = null;
+    this.length = null;
   }
 
   //  remove an item at a certain indexition / index
   removeByIndex(index) {
+    let curr = this.head;
+    let counter = 1;
+    if( index == 0 ) { // special case where we are removing head, therefore need to set it
+     this.head = this.head.next;
+     this.head.prev = null;
+    }else{
+     while(curr) { // while there are nodes, iterate
+      curr = curr.next
+      if ( curr == this.tail ) {
+       this.tail = this.tail.prev;
+       this.tail.next = null;
+      } else if( counter == index ) {
+       curr.prev.next = curr.next;
+       curr.next.prev = curr.prev;
+       break;
+      }
+      counter++;
+     }
+    }
+    this.length = this.length - 1;
+  }
+
+  removeByKeyVal(key,val) {
     let curr = this.head;
     let counter = 1;
     if( index == 0 ) { // special case where we are removing head, therefore need to set it
@@ -138,4 +181,5 @@ class DlList {
 }
 
 const list = new DlList(); //initializing list
+const test_list = new DlList(); //initializing list
 const backup_list = new DlList(); //initializing list

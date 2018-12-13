@@ -8,21 +8,17 @@ $(document).ready(function(){
   }
   $('#clearCache').click(function(){
     localStorage.clear();
+    list.reset();
+    test_list.reset();
+    backup_list.reset();
     $('#clearCacheDiv').hide();
     console.clear();
   });
   $('button[id^="createCache$"]').click(function(){
     list.appendNewNode_n(parseInt(this.id.split('$')[1]))
-    list.traverseNodes(prepareForSave);
+    list.traverseNodes('forward', prepareForSaveMain);
     $('#giphy').addClass('gifyActive');
     $('#saveCache').prop('disabled', false);
-  });
-
-  $('#saveCache').click(function(){
-    mainCache.save()
-    $('#showCache').prop('disabled', false);
-    $('#showDL').prop('disabled', false);
-    $('#clearCacheDiv').show();
   });
   $('#showCache').click(function(){
     mainCache.read();
@@ -30,6 +26,38 @@ $(document).ready(function(){
   $('#showDL').click(function(){
     list.logListOfNodes();
   });
+  $('#saveCache').click(function(){
+    mainCache.save()
+    $('#showCache').prop('disabled', false);
+    $('#showDL').prop('disabled', false);
+    $('#clearCacheDiv').show();
+  });
+
+
+  $('#testCache100').click(function(){
+    test_list.appendNewNode_n("", Node.preInitInstanceArr);
+    test_list.traverseNodes('forward', prepareForSaveTest);
+    $('#saveCache2s').prop('disabled', false);
+  });
+
+  $('#saveCache2s').click(function(){
+    testCache.save()
+    $('#showCache2s').prop('disabled', false);
+    $('#showDL2s').prop('disabled', false);
+    $('#removoeOldCache2s').prop('disabled', false);
+    $('#clearCacheDiv').show();
+  });
+
+  $('#showCache2s').click(function(){
+    testCache.read();
+  });
+
+  $('#showDL2s').click(function(){
+    test_list.logListOfNodes();
+  });
+
+
+
 
 
 });
