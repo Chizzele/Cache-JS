@@ -1,7 +1,8 @@
 class Cache {
   // Cache will hold list, getting very tired
-  constructor(name){
+  constructor(name, limit){
     this.name = name;
+    this.limit = limit;
     this.dataList = new Array();
     this.positionList = new Array();
   }
@@ -14,7 +15,6 @@ class Cache {
   save(){
     localStorage.setItem(this.name, JSON.stringify(this.dataList));
     console.log('Save Success!');
-    // localStorage.setItem(this.name, JSON.stringify(this.dataList), this.positionList);
   }
 
   read(){
@@ -27,7 +27,11 @@ class Cache {
     }
   }
 
+  update(){
+    // console.log(this);
+  }
+
 }
 
-var mainCache = new Cache('mainCache')
-var testCache = new Cache('mainCache')
+var mainCache = new Cache('mainCache', 10000);
+var testCache = new Cache('testCache', 100);

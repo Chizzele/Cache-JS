@@ -1,12 +1,12 @@
 class Node {
   // simple node, value will be an object with
-  // "data", dateTimeModified and dateTimeCreated
-  constructor(key, data, dateTimeCreated, dateTimeModified ){
+  // "data", dateTimeAccessed and dateTimeCreated
+  constructor(key, data, dateTimeCreated, dateTimeAccessed ){
     this.key = key;
     this.values = {
       "data" : data,
       "dateTimeCreated" : dateTimeCreated,
-      "dateTimeModified" : dateTimeModified
+      "dateTimeAccessed" : dateTimeAccessed
     };
     this.next = null;
     this.prev = null;

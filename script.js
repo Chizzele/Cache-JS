@@ -3,9 +3,12 @@ $(document).ready(function(){
   if(localStorage.getItem('mainCache') != undefined || localStorage.getItem('mainCache') != null){
     $('#clearCacheDiv').show();
     mainCache.read();
+  }else if(localStorage.getItem('testCache') != undefined || localStorage.getItem('testCache') != null){
+    testCache.read();
   }else{
     $('#clearCacheDiv').hide();
   }
+
   $('#clearCache').click(function(){
     localStorage.clear();
     list.reset();
@@ -14,18 +17,22 @@ $(document).ready(function(){
     $('#clearCacheDiv').hide();
     console.clear();
   });
+
   $('button[id^="createCache$"]').click(function(){
     list.appendNewNode_n(parseInt(this.id.split('$')[1]))
     list.traverseNodes('forward', prepareForSaveMain);
     $('#giphy').addClass('gifyActive');
     $('#saveCache').prop('disabled', false);
   });
+
   $('#showCache').click(function(){
     mainCache.read();
   });
+
   $('#showDL').click(function(){
     list.logListOfNodes();
   });
+
   $('#saveCache').click(function(){
     mainCache.save()
     $('#showCache').prop('disabled', false);
@@ -55,6 +62,13 @@ $(document).ready(function(){
   $('#showDL2s').click(function(){
     test_list.logListOfNodes();
   });
+
+  $('#removoeOldCache2s').click(function(){
+    test_list.traverseNodes("reverse", removeOldestTest)
+    // list.traverseNodes('forward', prepareForSaveTest);
+  });
+
+
 
 
 

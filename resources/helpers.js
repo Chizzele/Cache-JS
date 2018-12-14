@@ -7,6 +7,8 @@ var environment = 'dev'; // set to production to run on the hour when data comes
 var dllToJson = {};
 var positions = {};
 var oldest = null;
+var tempNode = null;
+var foundNode = null;
 
 
 // helper for date, adding hours for testing purposes
@@ -44,24 +46,13 @@ function is24HoursOld(date){
 function removeOldestMain(listItem, final){
   var values = listItem.values;
   if(oldest == null){
-    console.log('first');
-    oldest = {
-      "mainKey" : listItem.key,
-      "values" : values,
-      "next" : listItem.next,
-      "prev" : listItem.prev
-    };
+    oldest = listItem;
   }else{
     if(values.dateTimeCreated <= oldest.values.dateTimeCreated){
-      oldest = {
-        "mainKey" : listItem.key,
-        "values" : values,
-        "next" : listItem.next,
-        "prev" : listItem.prev
-      };
+      oldest = listItem
     }
     if(final == true){ // on final call... declare the poor soul BANISHED mwahahah
-      test_list.removeNode(oldest);
+      list.removeNode(oldest);
       oldest = null;
     }
   }
@@ -71,26 +62,40 @@ function removeOldestMain(listItem, final){
 // on the test listing though
 function removeOldestTest(listItem, final){
   var values = listItem.values;
-  if(oldest == null){
-    console.log('first');
-    oldest = {
-      "mainKey" : listItem.key,
-      "values" : values,
-      "next" : listItem.next,
-      "prev" : listItem.prev
-    };
+  if(tempNode == null){
+    tempNode = listItem;
+    oldest = tempNode;
   }else{
-    if(values.dateTimeCreated <= oldest.values.dateTimeCreated){
-      oldest = {
-        "mainKey" : listItem.key,
-        "values" : values,
-        "next" : listItem.next,
-        "prev" : listItem.prev
-      };
+    // created before , and no accesstime, set
+    if(values.dateTimeCreated <= oldest.values.dateTimeCreated && values.dateTimeAccessed == undefined){
+      console.log('setting');
+      oldest = listItem;
+    // created before , and access time is more than oldest time created, donts set
+    }else if(values.dateTimeAccessed > oldest.values.dateTimeCreated){
+      oldest = oldest;
+    // accessed is less than date time created
+    }else if(values.dateTimeAccessed < oldest.values.dateTimeCreated){
+      oldest = listItem;
     }
     if(final == true){ // on final call... declare the poor soul BANISHED mwahahah
+      console.log("EXPECTED STRING = T32TQE2\nActual String =  ", oldest.values.data)
       test_list.removeNode(oldest);
+      testCache.update();
       oldest = null;
+    }
+  }
+}
+
+function findNode(listItem, final, nodeToFind){
+  if(tempNode == null){
+    tempNode = listItem;
+  }else{
+    console.log(listItem, nodeToFind);
+    if(tempNode.values.data === listItem.values.data && tempNode.key === listItem.key){
+      foundNode = listItem;
+      console.log('found', foundNode);
+    }else if(foundNode == null && final == true){
+      alert('node not found');
     }
   }
 }

@@ -7,11 +7,11 @@ class DlList {
 
   appendNode(nodeKey, data, dateTimeCreated, isExistingNode){ // appends a node to the end of list
     if(this.length == null) this.length = 0;
-    let dateTimeModified = new Date(); // for testing, today
+    let dateTimeAccessed = new Date(); // for testing, today
     if(isExistingNode){
       var node = isExistingNode;
     }else{
-      var node = new Node(nodeKey, data, dateTimeCreated, dateTimeModified);
+      var node = new Node(nodeKey, data, dateTimeCreated, dateTimeAccessed);
     }
     if(!this.head){ //null no need to set node prev/next as there is nothing else in list
       this.head = node;
@@ -55,7 +55,7 @@ class DlList {
   // pass a function to work on the list, you can do the above by passing console.log
   // by passing console.log for instance
   // example ...... list.traverseNodes(console.log)
-  traverseNodes(direction, fn){
+  traverseNodes(direction, fn, node){
     if(direction == 'forward'){
       let curr = this.head;
       while(curr != null){
@@ -127,28 +127,62 @@ class DlList {
     this.length = this.length - 1;
   }
 
-  removeByKeyVal(key,val) {
-    let curr = this.head;
-    let counter = 1;
-    if( index == 0 ) { // special case where we are removing head, therefore need to set it
-     this.head = this.head.next;
-     this.head.prev = null;
-    }else{
-     while(curr) { // while there are nodes, iterate
-      curr = curr.next
-      if ( curr == this.tail ) {
-       this.tail = this.tail.prev;
-       this.tail.next = null;
-      } else if( counter == index ) {
-       curr.prev.next = curr.next;
-       curr.next.prev = curr.prev;
-       break;
-      }
-      counter++;
+  // removeByKeyVal(key,val) {
+  //   let curr = this.head;
+  //   let counter = 1;
+  //   if( index == 0 ) { // special case where we are removing head, therefore need to set it
+  //    this.head = this.head.next;
+  //    this.head.prev = null;
+  //   }else{
+  //    while(curr) { // while there are nodes, iterate
+  //     curr = curr.next
+  //     if ( curr == this.tail ) {
+  //      this.tail = this.tail.prev;
+  //      this.tail.next = null;
+  //     } else if( counter == index ) {
+  //      curr.prev.next = curr.next;
+  //      curr.next.prev = curr.prev;
+  //      break;
+  //     }
+  //     counter++;
+  //    }
+  //   }
+  //   this.length = this.length - 1;
+  // }
+
+  removeNode(node){
+    let curr = this.head; //traverse from head
+    while(curr) {
+      if(curr.values.data === node.values.data && curr.key === node.key){ //if found
+        if(curr == this.head && curr == this.tail){
+          this.head = null;
+          this.tail = null;
+        }else if(curr == this.head){
+          this.head = this.head.next
+          this.head.prev = null
+        }else if(curr == this.tail){
+          this.tail = this.tail.prev;
+          this.tail.next = null;
+        }else{
+          curr.prev.next = curr.next;
+          curr.next.prev = curr.prev;
+        }
+        this.length = this.length - 1;
+        console.log('deleted', node);
      }
+     curr = curr.next
     }
-    this.length = this.length - 1;
   }
+
+  // findNode(node){
+  //   let curr = this.head; //traverse from head
+  //   while(curr) {
+  //     if(curr.values.data === node.values.data && curr.key === node.key){ //if found
+  //       console.log('found', node);
+  //    }
+  //    curr = curr.next
+  //   }
+  // }
 
   replaceByIndex( index, node ) {
     if(index > this.length){
