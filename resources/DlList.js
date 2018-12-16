@@ -17,9 +17,20 @@ class DlList {
       this.head = node;
       this.tail = node;
     }else{ //not null, head is set, will not change
-      node.prev = this.tail; //linked list so only really need to move the tail
-      this.tail.next = node;
-      this.tail = node;
+      if(node.key == "TESTNODE"){
+        if(test_list.length >= 100){ //test data limit
+          console.log('breaker hit');
+          test_list.traverseNodes("reverse", removeOldestTest);
+        }
+        node.prev = this.tail; //linked list so only really need to move the tail
+        this.tail.next = node;
+        this.tail = node;
+      }else{
+        node.prev = this.tail; //linked list so only really need to move the tail
+        this.tail.next = node;
+        this.tail = node;
+      }
+
     }
     this.length = this.length + 1;
   }

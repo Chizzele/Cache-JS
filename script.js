@@ -52,6 +52,7 @@ $(document).ready(function(){
     $('#showCache2s').prop('disabled', false);
     $('#showDL2s').prop('disabled', false);
     $('#removoeOldCache2s').prop('disabled', false);
+    $('#breaker1').prop('disabled', false);
     $('#clearCacheDiv').show();
   });
 
@@ -68,6 +69,10 @@ $(document).ready(function(){
     // list.traverseNodes('forward', prepareForSaveTest);
   });
 
+  $('breaker1').click(function(){
+    const testerNode101 = new Node("TESTNODE", "THIS WILL KICK U OUT T32TQE2", minusHours(new Date(),1), new Date());
+    test_list.appendNode(testerNode101)
+  });
 
 
 
